@@ -12,8 +12,15 @@
 
 .message__userCard {
     background-color: #2199ff !important;
+    border-radius: 15px 50px !important; 
+    color: seashell;
 }
 
 .message__guestCard {
-    background-color: gray !important;
+    background-color: #373737 !important;
+    border-radius: 30px !important;
+}
+
+.MuiPaper-root {
+    color: seashell !important;
 }

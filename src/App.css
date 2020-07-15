@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #18191A;
+  color: white;
 }
 
 .App-logo {
@@ -15,9 +17,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  min-height: 100vh#303132olumn;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -48,9 +48,10 @@
   position: fixed;
   bottom: 0;
   z-index: 1;
-  background-color: #e9e9eb;
-  width: 100%;
+  background-color: #303132;
+  width: 95%;
   margin: 20px;
+  border-radius: 24px;
 }
 
 .app__formControl {
@@ -60,4 +61,8 @@
 
 .MuiCardContent-root {
   padding: 10px;
+}
+
+.MuiInputBase-input {
+  color: seashell !important;
 }
