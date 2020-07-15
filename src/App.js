@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import { Button, InputLabel, Input, FormControl } from '@material-ui/core';
 import './App.css';
+import firebase from "firebase"
+import db from './firebase'
+import Message from './Message'
 
 function App() {
+  const [input, setInput] = useState('')
+  const [messages, setMessages] = useState([])
+  const [username, setUsername] = useState('')
+
+  useEffect(() =>{
+    db.collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
+      setMessages(snapshot.docs.map(doc => doc.data()))
+      console.log(snapshot.docs.map(doc => doc.data())) 
+    })
+  }, [])
+
+  const sendMessage = (event) => {
+    event.preventDefault()
+    // setMessages([...messages, { username: username, text: input }])
+    db.collection('messages').add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    setInput('')
+  }
+
+  useEffect(() => {
+    setUsername(prompt('enter your name please!'))
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>test clever progrmamer clone🚀</h1>
+      <h2>Welcome {username}</h2>
+      <form>
+      <FormControl>
+          <InputLabel>Enter a message...</InputLabel>
+          <Input value={input} onChange={event => setInput(event.target.value)}/>
+          <Button variant="contained" color="primary" type="submit" disabled={!input} onClick={sendMessage}>send a message</Button>
+         </FormControl>
+      </form>
+
+      {
+        <ul>
+          {messages.map(message => (
+            <Message username={username} message={message} />
+          ))}
+        </ul>
+      }
+
     </div>
   );
 }
