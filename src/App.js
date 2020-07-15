@@ -51,12 +51,11 @@ function App() {
 
       <FlipMove>
         {
-          <ul>
-
+          <>
             {messages.map(({id, message}) => (
               <Message key={id} username ={username} message={message} /> 
             ))}
-          </ul>
+          </>
         }
       </FlipMove>
 
